@@ -4,7 +4,5 @@ import android.widget.ImageView
 
 data class Question (
     val quote: String,
-    val correctAnswerImageView: ImageView,
-    val answerOption: List<ImageView>,
-    val countOfQuestions: Int
+    val answerOption: List<Int>
 )
