@@ -45,13 +45,13 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view_1"
-        android:layout_width="100dp"
-        android:layout_height="150dp"
-        android:layout_margin="16dp"
+        android:layout_width="103dp"
+        android:layout_height="158dp"
         android:elevation="4dp"
         app:cardCornerRadius="5dp"
         app:layout_constraintBottom_toBottomOf="@+id/card_view_2"
         app:layout_constraintEnd_toStartOf="@+id/card_view_2"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/card_view_2">
 
@@ -65,9 +65,8 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view_2"
-        android:layout_width="100dp"
-        android:layout_height="150dp"
-        android:layout_margin="16dp"
+        android:layout_width="103dp"
+        android:layout_height="158dp"
         android:elevation="4dp"
         app:cardCornerRadius="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -86,9 +85,8 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view_3"
-        android:layout_width="100dp"
-        android:layout_height="150dp"
-        android:layout_margin="16dp"
+        android:layout_width="103dp"
+        android:layout_height="158dp"
         android:elevation="4dp"
         app:cardCornerRadius="5dp"
         app:layout_constraintBottom_toBottomOf="@+id/card_view_2"
@@ -96,12 +94,12 @@
         app:layout_constraintStart_toEndOf="@+id/card_view_2"
         app:layout_constraintTop_toTopOf="@+id/card_view_2">
 
-            <ImageView
-                android:id="@+id/iv_option3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/peter_pan" />
+        <ImageView
+            android:id="@+id/iv_option3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/peter_pan" />
     </androidx.cardview.widget.CardView>
 
 
