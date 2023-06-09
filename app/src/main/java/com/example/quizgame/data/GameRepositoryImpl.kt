@@ -32,7 +32,7 @@ object GameRepositoryImpl : GameRepository {
         R.drawable.anna_karenina
     )
 
-    override fun generateQuestion(countOfQuestion: Int, countOfAnswerOptions: Int): Question {
+    override fun generateQuestion(countOfAnswerOptions: Int): Question {
         val currentQuote = getCurrentQuote()
         val correctAnswer = quotesMap[currentQuote]
         val answerOptions = mutableSetOf<Int>()
@@ -41,22 +41,34 @@ object GameRepositoryImpl : GameRepository {
         while (answerOptions.size < countOfAnswerOptions) {
             answerOptions.add(bookName.random())
         }
-        return Question(currentQuote, answerOptions.toList())
+        return Question(currentQuote, answerOptions.toList(), correctAnswer)
     }
 
     override fun getGameSettings(level: Level): GameSettings {
         return when (level) {
             Level.TEST -> {
-                GameSettings(50)
+                GameSettings(
+                    50,
+                    3
+                )
             }
             Level.EASY -> {
-                GameSettings(60)
+                GameSettings(
+                    60,
+                    5
+                )
             }
             Level.MEDIUM -> {
-                GameSettings(80)
+                GameSettings(
+                    80,
+                    10
+                )
             }
             Level.HARD -> {
-                GameSettings(95)
+                GameSettings(
+                    95,
+                    15
+                )
             }
         }
     }

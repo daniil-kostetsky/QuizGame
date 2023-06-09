@@ -9,4 +9,6 @@
     <string name="play_string">play</string>
     <string name="vector">vector</string>
     <string name="book_image_title">Book image title</string>
+    <string name="retry_game">Retry</string>
+    <string name="quote_text">\"%s\"</string>
 </resources>

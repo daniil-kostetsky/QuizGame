@@ -6,9 +6,7 @@ import com.example.quizgame.domain.entity.Question
 
 interface GameRepository {
 
-    fun generateQuestion(
-        countOfQuestion: Int,
-        countOfAnswerOptions: Int): Question
+    fun generateQuestion(countOfAnswerOptions: Int): Question
 
     fun getGameSettings(level: Level): GameSettings
 }
