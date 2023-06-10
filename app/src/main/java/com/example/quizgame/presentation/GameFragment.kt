@@ -1,19 +1,36 @@
 package com.example.quizgame.presentation
 
+import android.content.res.ColorStateList
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.quizgame.R
 import com.example.quizgame.databinding.FragmentGameBinding
 import com.example.quizgame.domain.entity.GameResult
-import com.example.quizgame.domain.entity.GameSettings
 import com.example.quizgame.domain.entity.Level
-import com.example.quizgame.domain.entity.Question
 
 class GameFragment : Fragment() {
+
+    private val viewModel by lazy {
+        ViewModelProvider(
+            this,
+            ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
+        )[GameViewModel::class.java]
+    }
+
+    private val ivOptions by lazy {
+        mutableListOf<ImageView>().apply {
+            add(binding.ivOption1)
+            add(binding.ivOption2)
+            add(binding.ivOption3)
+        }
+    }
 
     private lateinit var level: Level
 
@@ -37,16 +54,61 @@ class GameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.ivOption1.setOnClickListener {
-            launchGameFinishedFragment(GameResult(
-        true,
-                5,
-                GameSettings(60),
-                mapOf(Question("sas", listOf(1), 2) to R.drawable.anna_karenina)
 
-            )
-            )
+        observeViewModel()
+        viewModel.startGame(level)
+        setAnswersClickListeners()
+    }
+
+    private fun setAnswersClickListeners() {
+        for (ivOption in ivOptions) {
+            ivOption.setOnClickListener {
+                val imageId = ivOption.tag.toString().toInt()
+              //  Log.d("Repo", "ivOption GameFrag = ${ivOption.id}, image = $image")
+                viewModel.chooseAnswer(imageId) // maybe here crash
+            }
         }
+    }
+
+    private fun observeViewModel() {
+
+        viewModel.question.observe(viewLifecycleOwner) {
+            binding.tvQuote.text = String.format(
+                getString(R.string.quote_text),
+                it.quote
+            )
+            for (i in ivOptions.indices) {
+                val drawable = ContextCompat.getDrawable(requireContext(), it.answerOption[i])
+                ivOptions[i].setImageDrawable(drawable)
+                ivOptions[i].tag = it.answerOption[i]
+            }
+        }
+
+        viewModel.percentOfRightAnswers.observe(viewLifecycleOwner) {
+            binding.progressBar.setProgress(it, true)
+        }
+
+        viewModel.enoughPercentOfRightAnswers.observe(viewLifecycleOwner) {
+            val color = getColorByState(it)
+            binding.progressBar.progressTintList = ColorStateList.valueOf(color)
+        }
+
+        viewModel.minPercentSecondary.observe(viewLifecycleOwner) {
+            binding.progressBar.secondaryProgress = it
+        }
+
+        viewModel.gameResult.observe(viewLifecycleOwner) {
+            launchGameFinishedFragment(it)
+        }
+    }
+
+    private fun getColorByState(state: Boolean): Int {
+        val colorResId = if (state) {
+            android.R.color.holo_green_light
+        } else {
+            android.R.color.holo_red_light
+        }
+        return ContextCompat.getColor(requireContext(), colorResId)
     }
 
     private fun launchGameFinishedFragment(gameResult: GameResult) {

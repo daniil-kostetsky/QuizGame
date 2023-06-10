@@ -57,8 +57,8 @@ class GameViewModel : ViewModel() {
     }
 
     private fun updateProgress() {
-        val tempPercent = ((countOfRightAnswers /
-                gameSettings.countOfQuestion.toDouble()) * 100).toInt()
+        val tempPercent = ((countOfRightAnswers.toDouble() /
+                gameSettings.countOfQuestion) * 100).toInt()
         _percentOfRightAnswers.value = tempPercent
         _enoughPercentOfRightAnswers.value = tempPercent >= gameSettings.minPercentOfRightAnswers
     }
