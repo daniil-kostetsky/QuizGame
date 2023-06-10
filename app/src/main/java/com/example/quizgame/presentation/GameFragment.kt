@@ -64,8 +64,7 @@ class GameFragment : Fragment() {
         for (ivOption in ivOptions) {
             ivOption.setOnClickListener {
                 val imageId = ivOption.tag.toString().toInt()
-              //  Log.d("Repo", "ivOption GameFrag = ${ivOption.id}, image = $image")
-                viewModel.chooseAnswer(imageId) // maybe here crash
+                viewModel.chooseAnswer(imageId)
             }
         }
     }

@@ -82,8 +82,6 @@ class GameViewModel : ViewModel() {
     private fun finishGame() {
         _gameResult.value = GameResult(
             enoughPercentOfRightAnswers.value == true,
-            countOfRightAnswers,
-            gameSettings,
             userAnswers
         )
     }
