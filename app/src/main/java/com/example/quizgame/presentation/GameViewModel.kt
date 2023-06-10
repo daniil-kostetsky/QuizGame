@@ -74,6 +74,7 @@ class GameViewModel : ViewModel() {
     private fun generateQuestion() {
         if (countOfQuestionTemp == 0) {
             finishGame()
+            return
         }
         _question.value = generateQuestionUseCase()
     }

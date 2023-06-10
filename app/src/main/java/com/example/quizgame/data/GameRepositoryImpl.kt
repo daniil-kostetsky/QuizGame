@@ -70,7 +70,6 @@ object GameRepositoryImpl : GameRepository {
     )
 
     override fun generateQuestion(countOfAnswerOptions: Int): Question {
-//        val currentQuote = getCurrentQuote()
         val currentQuote = quotes.random()
         val correctAnswer = quotesMap[currentQuote]
         val answerOptions = mutableSetOf<Int>()
@@ -111,15 +110,4 @@ object GameRepositoryImpl : GameRepository {
             }
         }
     }
-
-//    private var i = 0
-//
-//    private fun getCurrentQuote(): String {
-//        if (i >= quotes.size) {
-//            i = 0
-//        }
-//        val res = quotes[i]
-//        i++
-//        return res
-//    }
 }
