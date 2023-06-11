@@ -5,9 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="4dp"
-
     android:layout_marginEnd="4dp"
-
     app:cardCornerRadius="10dp"
     app:cardElevation="4dp"
     app:cardUseCompatPadding="true">
@@ -63,8 +61,8 @@
             <ImageView
                 android:id="@+id/iv_user_answer"
                 android:layout_width="match_parent"
-                android:contentDescription="@string/user_answer_image"
                 android:layout_height="match_parent"
+                android:contentDescription="@string/user_answer_image"
                 android:scaleType="centerCrop"
                 tools:src="@drawable/fahrenheit_451" />
         </androidx.cardview.widget.CardView>
@@ -100,8 +98,8 @@
             <ImageView
                 android:id="@+id/iv_correct_answer"
                 android:layout_width="match_parent"
-                android:contentDescription="@string/correct_answer_image"
                 android:layout_height="match_parent"
+                android:contentDescription="@string/correct_answer_image"
                 android:scaleType="centerCrop"
                 tools:src="@drawable/fahrenheit_451" />
         </androidx.cardview.widget.CardView>
