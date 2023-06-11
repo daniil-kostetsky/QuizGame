@@ -1,32 +1,26 @@
 package com.example.quizgame.presentation
 
-import android.media.Image
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.quizgame.R
 import com.example.quizgame.databinding.FragmentGameFinishedBinding
 import com.example.quizgame.domain.entity.GameResult
 
 class GameFinishedFragment : Fragment() {
 
-    private lateinit var gameResult: GameResult
+    private val args by navArgs<GameFinishedFragmentArgs>()
 
     private var _binding: FragmentGameFinishedBinding? = null
-    private val binding get() = _binding ?:
-        throw RuntimeException("FragmentGameFinishedBinding == null")
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        parseArgs()
-    }
+    private val binding get() = _binding ?: throw RuntimeException(
+        "FragmentGameFinishedBinding == null")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,21 +30,8 @@ class GameFinishedFragment : Fragment() {
         return binding.root
     }
 
-    private fun parseArgs() {
-        requireArguments().getParcelable<GameResult>("result")?.let {
-            gameResult = it
-        }
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        requireActivity().onBackPressedDispatcher
-            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    retryGame()
-                }
-            })
-
         binding.buttonRetryGame.setOnClickListener {
             retryGame()
         }
@@ -61,7 +42,7 @@ class GameFinishedFragment : Fragment() {
 
     private fun isWin() {
         val textView = binding.linearLayoutResult.findViewById<TextView>(R.id.tv_win)
-        val colorResId = if (gameResult.isWin) {
+        val colorResId = if (args.gameResult.isWin) {
             android.R.color.holo_green_light
         } else {
             android.R.color.holo_red_light
@@ -69,7 +50,7 @@ class GameFinishedFragment : Fragment() {
         val color = ContextCompat.getColor(requireContext(), colorResId)
         textView.setTextColor(color)
 
-        val isWinStr = if (gameResult.isWin) {
+        val isWinStr = if (args.gameResult.isWin) {
             R.string.user_win
         } else {
             R.string.user_lose
@@ -79,7 +60,7 @@ class GameFinishedFragment : Fragment() {
 
     private fun showResultList() {
 
-        val result = gameResult.userAnswers
+        val result = args.gameResult.userAnswers
         for (res in result) {
             val quote = res.key.quote
             val userAnswer = res.value
@@ -113,18 +94,7 @@ class GameFinishedFragment : Fragment() {
     }
 
     private fun retryGame() {
-        requireActivity().supportFragmentManager
-            .popBackStack("GameFragment", FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        findNavController().popBackStack()
     }
 
-    companion object {
-
-        fun newInstance(gameResult: GameResult): GameFinishedFragment {
-            return GameFinishedFragment().apply {
-                arguments = Bundle().apply {
-                    putParcelable("result", gameResult)
-                }
-            }
-        }
-    }
 }

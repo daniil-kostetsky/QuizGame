@@ -10,6 +10,8 @@ import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.quizgame.R
 import com.example.quizgame.databinding.FragmentGameBinding
 import com.example.quizgame.domain.entity.GameResult
@@ -32,16 +34,10 @@ class GameFragment : Fragment() {
         }
     }
 
-    private lateinit var level: Level
+    private val args by navArgs<GameFragmentArgs>()
 
     private var _binding: FragmentGameBinding? = null
-    private val binding get() = _binding ?:
-        throw RuntimeException("FragmentGameBinding == null")
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        parseArgs()
-    }
+    private val binding get() = _binding ?: throw RuntimeException("FragmentGameBinding == null")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,7 +52,7 @@ class GameFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         observeViewModel()
-        viewModel.startGame(level)
+        viewModel.startGame(args.level)
         setAnswersClickListeners()
     }
 
@@ -111,31 +107,12 @@ class GameFragment : Fragment() {
     }
 
     private fun launchGameFinishedFragment(gameResult: GameResult) {
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.main_container, GameFinishedFragment.newInstance(gameResult))
-            .addToBackStack(null)
-            .commit()
+        val action = GameFragmentDirections.actionGameFragmentToGameFinishedFragment(gameResult)
+        findNavController().navigate(action)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    private fun parseArgs() {
-        requireArguments().getParcelable<Level>("level")?.let {
-            level = it
-        }
-    }
-
-    companion object {
-
-        fun newInstance(level: Level): GameFragment {
-            return GameFragment().apply {
-                arguments = Bundle().apply {
-                    putParcelable("level", level)
-                }
-            }
-        }
     }
 }
