@@ -13,6 +13,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.quizgame.R
 import com.example.quizgame.databinding.FragmentGameFinishedBinding
 import com.example.quizgame.domain.entity.GameResult
+import com.example.quizgame.domain.entity.Question
 
 class GameFinishedFragment : Fragment() {
 
@@ -35,57 +36,43 @@ class GameFinishedFragment : Fragment() {
         binding.buttonRetryGame.setOnClickListener {
             retryGame()
         }
-
-        isWin()
+        binding.gameResult = args.gameResult
         showResultList()
-    }
-
-    private fun isWin() {
-        val textView = binding.linearLayoutResult.findViewById<TextView>(R.id.tv_win)
-        val colorResId = if (args.gameResult.isWin) {
-            android.R.color.holo_green_light
-        } else {
-            android.R.color.holo_red_light
-        }
-        val color = ContextCompat.getColor(requireContext(), colorResId)
-        textView.setTextColor(color)
-
-        val isWinStr = if (args.gameResult.isWin) {
-            R.string.user_win
-        } else {
-            R.string.user_lose
-        }
-        textView.setText(isWinStr)
     }
 
     private fun showResultList() {
 
         val result = args.gameResult.userAnswers
         for (res in result) {
-            val quote = res.key.quote
-            val userAnswer = res.value
-            val correctAnswer = res.key.correctAnswer
-
-            val itemView = if (userAnswer == correctAnswer) {
-                layoutInflater.inflate(
-                    R.layout.item_true_answer,
-                    binding.linearLayoutResult,
-                    false)
-            } else {
-                layoutInflater.inflate(
-                    R.layout.item_false_answer,
-                    binding.linearLayoutResult,
-                    false)
-            }
-            val tvQuote = itemView.findViewById<TextView>(R.id.tv_quote)
-            val ivUserAnswer = itemView.findViewById<ImageView>(R.id.iv_user_answer)
-            val ivCorrectAnswer = itemView.findViewById<ImageView>(R.id.iv_correct_answer)
-
-            tvQuote.text = String.format(getString(R.string.quote_text, quote))
-            ivUserAnswer.setImageResource(userAnswer)
-            ivCorrectAnswer.setImageResource(correctAnswer)
+            val itemView = getItemView(res)
             binding.linearLayoutResult.addView(itemView)
         }
+    }
+
+    private fun getItemView(res: Map.Entry<Question, Int>): View {
+        val quote = res.key.quote
+        val userAnswer = res.value
+        val correctAnswer = res.key.correctAnswer
+
+        val itemView = if (userAnswer == correctAnswer) {
+            layoutInflater.inflate(
+                R.layout.item_true_answer,
+                binding.linearLayoutResult,
+                false)
+        } else {
+            layoutInflater.inflate(
+                R.layout.item_false_answer,
+                binding.linearLayoutResult,
+                false)
+        }
+        val tvQuote = itemView.findViewById<TextView>(R.id.tv_quote)
+        val ivUserAnswer = itemView.findViewById<ImageView>(R.id.iv_user_answer)
+        val ivCorrectAnswer = itemView.findViewById<ImageView>(R.id.iv_correct_answer)
+
+        tvQuote.text = String.format(getString(R.string.quote_text, quote))
+        ivUserAnswer.setImageResource(userAnswer)
+        ivCorrectAnswer.setImageResource(correctAnswer)
+        return itemView
     }
 
     override fun onDestroyView() {
@@ -96,5 +83,4 @@ class GameFinishedFragment : Fragment() {
     private fun retryGame() {
         findNavController().popBackStack()
     }
-
 }
