@@ -9,4 +9,12 @@
     <string name="play_string">play</string>
     <string name="vector">vector</string>
     <string name="book_image_title">Book image title</string>
+    <string name="retry_game">Retry</string>
+    <string name="quote_text">\"%s\"</string>
+    <string name="correct_answer">Correct answer</string>
+    <string name="user_answer">User answer</string>
+    <string name="user_answer_image">User answer image</string>
+    <string name="correct_answer_image">Correct answer image</string>
+    <string name="user_win">You Win!</string>
+    <string name="user_lose">You Lose</string>
 </resources>

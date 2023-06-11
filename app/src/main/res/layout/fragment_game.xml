@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <ImageView
         android:id="@+id/vector"
@@ -34,15 +34,30 @@
         android:layout_marginEnd="32dp"
         android:fontFamily="@font/roboto"
         android:gravity="center"
+        android:text="@string/quote_text"
         android:textAllCaps="true"
-        android:text="All happy families are alike; every unhappy family is unhappy in its own way."
         android:textColor="@color/match_the_cover_of_the_book_with_its_first_line_color"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/card_view_2"
+        app:layout_constraintBottom_toTopOf="@+id/progress_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vector" />
+        app:layout_constraintTop_toBottomOf="@+id/vector"
+        app:layout_constraintVertical_chainStyle="spread" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:max="100"
+        android:secondaryProgressTint="@android:color/background_dark"
+        app:layout_constraintBottom_toTopOf="@id/card_view_2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_quote" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view_1"
@@ -61,7 +76,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/fahrenheit_451" />
+            tools:src="@drawable/fahrenheit_451" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -73,14 +88,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/card_view_3"
         app:layout_constraintStart_toEndOf="@+id/card_view_1"
-        app:layout_constraintTop_toBottomOf="@+id/tv_quote">
+        app:layout_constraintTop_toBottomOf="@+id/progress_bar">
 
         <ImageView
             android:id="@+id/iv_option2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/anna_karenina" />
+            tools:src="@drawable/anna_karenina" />
 
     </androidx.cardview.widget.CardView>
 
@@ -100,7 +115,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/peter_pan" />
+            tools:src="@drawable/peter_pan" />
     </androidx.cardview.widget.CardView>
 
 

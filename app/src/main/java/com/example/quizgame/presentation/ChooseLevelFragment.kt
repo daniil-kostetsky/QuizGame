@@ -5,7 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.example.quizgame.R
 import com.example.quizgame.databinding.FragmentChooseLevelBinding
+import com.example.quizgame.domain.entity.Level
 
 class ChooseLevelFragment : Fragment() {
 
@@ -22,8 +25,26 @@ class ChooseLevelFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.buttonLevelEasy.setOnClickListener {
+            launchGameFragment(Level.EASY)
+        }
+        binding.buttonLevelMedium.setOnClickListener {
+            launchGameFragment(Level.MEDIUM)
+        }
+        binding.buttonLevelHard.setOnClickListener {
+            launchGameFragment(Level.HARD)
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun launchGameFragment(level: Level) {
+        val action = ChooseLevelFragmentDirections.actionChooseLevelFragmentToGameFragment(level)
+        findNavController().navigate(action)
     }
 }

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="4dp"
+
+    android:layout_marginEnd="4dp"
+
+    app:cardCornerRadius="10dp"
+    app:cardElevation="4dp"
+    app:cardUseCompatPadding="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#90EE90"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tv_quote"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:text="@string/quote_text"
+            android:textColor="@color/dark_gray"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Mr. and Mrs. Dursley of number four, Privet Drive, were proud to say that they were perfectly normal, thank you very much." />
+
+        <TextView
+            android:id="@+id/tv_user_answer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/roboto"
+            android:gravity="center"
+            android:text="@string/user_answer"
+            android:textColor="@color/dark_gray"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/tv_correct_answer"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_quote" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_user"
+            android:layout_width="83dp"
+            android:layout_height="138dp"
+            android:layout_marginTop="4dp"
+            android:elevation="4dp"
+            app:cardCornerRadius="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tv_user_answer"
+            app:layout_constraintStart_toStartOf="@+id/tv_user_answer"
+            app:layout_constraintTop_toBottomOf="@+id/tv_user_answer">
+
+            <ImageView
+                android:id="@+id/iv_user_answer"
+                android:layout_width="match_parent"
+                android:contentDescription="@string/user_answer_image"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                tools:src="@drawable/fahrenheit_451" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/tv_correct_answer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/roboto"
+            android:gravity="center"
+            android:text="@string/correct_answer"
+            android:textColor="@color/dark_gray"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tv_user_answer"
+            app:layout_constraintTop_toBottomOf="@id/tv_quote" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_correct"
+            android:layout_width="83dp"
+            android:layout_height="138dp"
+            android:layout_marginTop="4dp"
+            android:elevation="4dp"
+            app:cardCornerRadius="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tv_correct_answer"
+            app:layout_constraintStart_toStartOf="@+id/tv_correct_answer"
+            app:layout_constraintTop_toBottomOf="@+id/tv_user_answer">
+
+            <ImageView
+                android:id="@+id/iv_correct_answer"
+                android:layout_width="match_parent"
+                android:contentDescription="@string/correct_answer_image"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                tools:src="@drawable/fahrenheit_451" />
+        </androidx.cardview.widget.CardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
