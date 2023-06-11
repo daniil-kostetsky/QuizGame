@@ -1,7 +1,6 @@
 package com.example.quizgame.domain.entity
 
 import android.os.Parcelable
-import android.widget.ImageView
 import kotlinx.parcelize.Parcelize
 
 @Parcelize

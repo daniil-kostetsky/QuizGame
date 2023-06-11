@@ -1,21 +1,15 @@
 package com.example.quizgame.presentation
 
-import android.content.res.ColorStateList
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.quizgame.R
 import com.example.quizgame.databinding.FragmentGameBinding
 import com.example.quizgame.domain.entity.GameResult
-import com.example.quizgame.domain.entity.Level
 
 class GameFragment : Fragment() {
 

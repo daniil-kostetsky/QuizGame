@@ -1,5 +1,7 @@
 # Quiz
 
+### Иконка
+![icon](readme_screenshot/game_icon.png)
 ### Знакомство с правилами игры
 ![welcome screen](readme_screenshot/welcome_screen.png)
 ### Выбор уровня сложности
@@ -12,4 +14,4 @@
 ### Поражение
 ![game lose screen](readme_screenshot/game_lose_result.png)
 ### Статистика
-![game lose screen](readme_screenshot/scroll_result.png)
+![result list](readme_screenshot/scroll_result.png)

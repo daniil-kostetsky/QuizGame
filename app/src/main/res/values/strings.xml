@@ -15,4 +15,10 @@
     <string name="correct_answer_image">Correct answer image</string>
     <string name="user_win">You Win!</string>
     <string name="user_lose">You Lose</string>
+    <string name="hard">Hard</string>
+    <string name="medium">Medium</string>
+    <string name="easy">Easy</string>
+    <string name="third_answer_option">Third answer option</string>
+    <string name="second_answer_option">Second answer option</string>
+    <string name="first_answer_option">First answer option</string>
 </resources>
