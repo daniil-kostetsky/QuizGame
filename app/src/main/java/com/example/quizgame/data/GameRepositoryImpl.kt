@@ -1,6 +1,5 @@
 package com.example.quizgame.data
 
-import android.graphics.drawable.Drawable
 import android.util.Log
 import com.example.quizgame.R
 import com.example.quizgame.domain.entity.GameSettings
